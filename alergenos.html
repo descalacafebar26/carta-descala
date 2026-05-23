@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D'Escala · Alérgenos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0D0B08;
+  color: #F2EAD8;
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: #0D0B08;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.back-btn {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  color: rgba(201,168,76,0.7);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: #C9A84C; }
+.back-btn span { font-size: 16px; line-height:1; }
+.topbar-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #E8C97A;
+  letter-spacing: 0.15em;
+}
+.topbar-sep { color: rgba(201,168,76,0.3); }
+.topbar-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: rgba(242,234,216,0.5);
+  letter-spacing: 0.05em;
+}
+
+/* ── CONTENIDO ── */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* Aviso legal */
+.notice {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-left: 3px solid #C9A84C;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  color: rgba(242,234,216,0.65);
+  line-height: 1.7;
+}
+.notice strong { color: #E8C97A; }
+
+/* Leyenda */
+.legend {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.legend-title {
+  width: 100%;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(201,168,76,0.5);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.leg-item { display:flex; align-items:center; gap:8px; font-size:12px; color:rgba(242,234,216,0.6); }
+.yes { color: #e74c3c; font-size: 14px; }
+.may { color: #e67e22; font-size: 14px; }
+.non { color: rgba(255,255,255,0.15); font-size: 14px; }
+
+/* ── TABLA RESPONSIVE ── */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll::-webkit-scrollbar { height: 4px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+.table-scroll::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+/* Cabecera */
+thead th {
+  background: #1a1a14;
+  color: rgba(242,234,216,0.9);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 6px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+thead th:first-child {
+  text-align: left;
+  padding-left: 14px;
+  min-width: 180px;
+  background: #111009;
+  font-size: 10px;
+  color: rgba(201,168,76,0.6);
+}
+
+/* Fila de sección */
+.sec-row td {
+  background: #1C1A12;
+  color: #C9A84C;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+/* Filas normales */
+tbody tr:not(.sec-row) {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+}
+tbody tr:not(.sec-row):nth-child(even) { background: rgba(255,255,255,0.02); }
+tbody tr:not(.sec-row):hover { background: rgba(201,168,76,0.05); }
+
+td {
+  padding: 9px 6px;
+  vertical-align: middle;
+  border-right: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+}
+td:first-child { text-align: left; padding-left: 14px; }
+td:last-child { border-right: none; }
+
+.dish-name {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #F2EAD8;
+  line-height: 1.3;
+}
+.dish-sub {
+  font-size: 10px;
+  color: rgba(242,234,216,0.35);
+  font-weight: 300;
+  display: block;
+  margin-top: 2px;
+}
+
+.al { font-size: 14px; line-height:1; }
+
+/* ── PIE ── */
+.footer-note {
+  margin-top: 28px;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 11px;
+  color: rgba(242,234,216,0.4);
+  line-height: 1.8;
+}
+.footer-note strong { color: rgba(242,234,216,0.7); }
+.footer-reg {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 10px;
+  color: rgba(242,234,216,0.2);
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="index.html" class="back-btn"><span>‹</span> Volver</a>
+  <div class="topbar-sep">|</div>
+  <div class="topbar-brand">D'ESCALA</div>
+  <div class="topbar-sep">·</div>
+  <div class="topbar-title">Tabla de Alérgenos</div>
+</div>
+
+<div class="content">
+
+  <!-- AVISO -->
+  <div class="notice">
+    <strong>Información obligatoria</strong> según Reglamento UE nº 1169/2011 sobre información alimentaria facilitada al consumidor.<br>
+    Los platos se elaboran en cocina compartida donde se manipulan los 14 alérgenos reconocidos. <strong>Si tiene una alergia severa, consulte al personal antes de pedir.</strong>
+  </div>
+
+  <!-- LEYENDA -->
+  <div class="legend">
+    <div class="legend-title">Leyenda</div>
+    <div class="leg-item"><span class="yes">●</span> Contiene este alérgeno</div>
+    <div class="leg-item"><span class="may">◐</span> Puede contener trazas</div>
+    <div class="leg-item"><span class="non">–</span> No contiene</div>
+  </div>
+
+  <!-- TABLA -->
+  <div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Plato / Producto</th>
+        <th>🌾<br>Gluten</th>
+        <th>🦞<br>Crustáceos</th>
+        <th>🥚<br>Huevos</th>
+        <th>🐟<br>Pescado</th>
+        <th>🥜<br>Cacahuetes</th>
+        <th>🫘<br>Soja</th>
+        <th>🥛<br>Lácteos</th>
+        <th>🌰<br>Fr.Cáscara</th>
+        <th>🌿<br>Apio</th>
+        <th>🟡<br>Mostaza</th>
+        <th>🌱<br>Sésamo</th>
+        <th>🍷<br>Sulfitos</th>
+        <th>🌸<br>Altramuz</th>
+        <th>🦑<br>Moluscos</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="sec-row"><td colspan="15">☕ Desayunos</td></tr>
+
+      <tr>
+        <td><div class="dish-name">Café Solo / Cortado / Cappuccino<span class="dish-sub">Con o sin leche</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tostada con Aceite y Tomate<span class="dish-sub">Pan de barra · aceite de oliva · tomate</span></div></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tostada con Mantequilla y Mermelada</div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tostada con Jamón York</div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tostada con Jamón Serrano</div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr class="sec-row"><td colspan="15">🍽 Tapas</td></tr>
+
+      <tr>
+        <td><div class="dish-name">Croquetas de Jamón<span class="dish-sub">Jamón ibérico · bechamel · pan rallado</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Croquetas de Espinaca y Queso<span class="dish-sub">Queso fundido · bechamel · pan rallado</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tortilla de Patata<span class="dish-sub">Patata · huevo · aceite · sal</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Calamares<span class="dish-sub">Anillas rebozadas · salsa tártara · limón</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al may">◐</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Boquerones en Vinagre<span class="dish-sub">Aliño madrileño · ajo · perejil</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Alitas de Pollo<span class="dish-sub">6 unid. · marinadas · patatas rústicas</span></div></td>
+        <td><span class="al may">◐</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Patatas Bravas<span class="dish-sub">Patatas fritas · salsa brava casera</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Tequeños de Queso<span class="dish-sub">5 unid. · masa de trigo · queso blanco</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr class="sec-row"><td colspan="15">🥖 Bocadillos</td></tr>
+
+      <tr>
+        <td><div class="dish-name">Sándwich Mixto<span class="dish-sub">Pan de molde · jamón york · queso fundido</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Sándwich Mixto con Huevo</div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Hamburguesa D'Escala<span class="dish-sub">Carne · cheddar · bacon · mayonesa · pan brioche</span></div></td>
+        <td><span class="al yes">●</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al may">◐</span></td>
+        <td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr class="sec-row"><td colspan="15">🍳 Platos Principales</td></tr>
+
+      <tr>
+        <td><div class="dish-name">Filete de Pollo<span class="dish-sub">Patatas rústicas o arroz · ensalada</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Filete de Ternera<span class="dish-sub">Patatas rústicas · ensalada</span></div></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+      <tr>
+        <td><div class="dish-name">Codillo<span class="dish-sub">Salsa champiñones · verduras temporada</span></div></td>
+        <td><span class="al may">◐</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al may">◐</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+        <td><span class="al yes">●</span></td>
+        <td><span class="al non">–</span></td><td><span class="al non">–</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>
+
+  <!-- PIE -->
+  <div class="footer-note">
+    <strong>Aviso importante:</strong> Todos nuestros platos se elaboran en una cocina donde se manipulan los 14 alérgenos reconocidos por la normativa europea. Aunque tomamos medidas para evitar la contaminación cruzada, no podemos garantizar la ausencia total de trazas en ningún plato. Si usted o algún comensal tiene una alergia o intolerancia severa, le rogamos que lo indique al personal antes de hacer su pedido. Esta tabla es orientativa y está sujeta a cambios según temporada o disponibilidad de ingredientes.
+    <div class="footer-reg">Reglamento UE nº 1169/2011 &nbsp;·&nbsp; D'Escala Café·Bar · Madrid 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
