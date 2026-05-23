@@ -30,7 +30,6 @@
     overflow-x: hidden;
   }
 
-  /* Subtle texture */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -38,6 +37,43 @@
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,153,58,0.07) 0%, transparent 60%),
       radial-gradient(ellipse 60% 40% at 80% 110%, rgba(140,42,42,0.05) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
+  }
+
+  /* ── TOPBAR (nueva) ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: #0D0B08;
+    border-bottom: 1px solid rgba(201,153,58,0.2);
+    padding: 11px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .back-btn {
+    display: flex; align-items: center; gap: 7px;
+    text-decoration: none;
+    color: rgba(201,153,58,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+  .back-btn:hover { color: var(--gold); }
+  .back-btn-arrow { font-size: 15px; line-height: 1; }
+  .topbar-sep { color: rgba(201,153,58,0.2); font-size: 13px; }
+  .topbar-brand {
+    font-family: 'Playfair+Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold2);
+    letter-spacing: 0.14em;
+  }
+  .topbar-dot { color: rgba(201,153,58,0.3); font-size: 8px; }
+  .topbar-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(242,234,216,0.35);
+    letter-spacing: 0.04em;
   }
 
   .page { max-width: 500px; margin: 0 auto; position: relative; z-index: 1; }
@@ -88,7 +124,7 @@
 
   /* TABS */
   .tabs {
-    position: sticky; top: 0; z-index: 10;
+    position: sticky; top: 38px; z-index: 10;
     background: var(--bg2);
     border-bottom: 1px solid var(--line);
     display: flex; overflow-x: auto;
@@ -120,7 +156,6 @@
   .section.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* CATEGORY inside section */
   .cat-label {
     font-size: 9.5px;
     letter-spacing: 0.22em;
@@ -132,7 +167,6 @@
   .cat-label::after { content: ''; flex: 1; height: 0.5px; background: var(--line); }
   .cat-label:first-child { margin-top: 0; }
 
-  /* ITEM */
   .item {
     display: flex;
     justify-content: space-between;
@@ -164,7 +198,6 @@
     font-weight: 400;
   }
 
-  /* FEATURED */
   .item.feat {
     background: linear-gradient(135deg, rgba(201,153,58,0.08), rgba(201,153,58,0.03));
     border: 1px solid rgba(201,153,58,0.18);
@@ -175,7 +208,6 @@
   .item.feat .item-name { color: var(--gold2); font-weight: 700; }
   .item.feat .item-price { color: var(--gold2); font-size: 17px; }
 
-  /* BADGE */
   .badge {
     display: inline-block;
     font-size: 9px;
@@ -188,7 +220,6 @@
     margin-top: 4px;
   }
 
-  /* DRINKS GRID for bottles */
   .drinks-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -206,7 +237,6 @@
   .drink-card .item-price { color: var(--gold); font-size: 14px; }
   .drink-card .item-desc { font-size: 10.5px; }
 
-  /* FOOTER */
   .footer {
     margin-top: 8px;
     padding: 28px 24px;
@@ -230,6 +260,18 @@
 </style>
 </head>
 <body>
+
+  <!-- ── TOPBAR ── -->
+  <div class="topbar">
+    <a href="index.html" class="back-btn">
+      <span class="back-btn-arrow">‹</span> Volver
+    </a>
+    <div class="topbar-sep">|</div>
+    <div class="topbar-brand">D'ESCALA</div>
+    <div class="topbar-dot">✦</div>
+    <div class="topbar-title">Nuestra Carta</div>
+  </div>
+
 <div class="page">
 
   <!-- HEADER -->
@@ -260,29 +302,19 @@
     <div class="item"><div class="item-left"><div class="item-name">Cappuccino</div></div><div class="item-price">2.20€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Carajillo</div><div class="item-desc">Café con Barceló, Brugal o brandy</div></div><div class="item-price">2.80€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Té o Manzanilla</div></div><div class="item-price">1.50€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Chocolate Caliente</div></div><div class="item-price">2.00€</div></div> -->
-    <!--
-    <div class="cat-label">Zumos & Batidos</div>
-    <div class="item"><div class="item-left"><div class="item-name">Zumo de Naranja Natural</div></div><div class="item-price">2.50€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Zumo de Piña o Mango</div></div><div class="item-price">2.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Batido de Fresa</div></div><div class="item-price">3.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Batido de Chocolate</div></div><div class="item-price">3.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Batido de Vainilla</div></div><div class="item-price">3.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Batido de Plátano</div></div><div class="item-price">3.00€</div></div>
-    -->
+
     <div class="cat-label">Pan & Tostadas</div>
     <div class="item"><div class="item-left"><div class="item-name">Tostada con Aceite y Tomate</div></div><div class="item-price">2.00€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Tostada con Mantequilla y Mermelada</div></div><div class="item-price">2.00€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Tostada con Jamón York</div></div><div class="item-price">2.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Tostada con Jamón Serrano</div></div><div class="item-price">3.00€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Media Tostada</div><div class="item-desc">Con aceite y tomate o mantequilla</div></div><div class="item-price">1.20€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Churros con Chocolate</div></div><div class="item-price">3.50€</div></div>-->
 
     <div class="cat-label">Desayuno Completo</div>
     <div class="item feat">
       <div class="item-left">
         <div class="item-name">Desayuno D'Escala</div>
-        <div class="item-desc">Café (sólo o con leche)· tostada a elegir o croissant</div>
+        <div class="item-desc">Café (sólo o con leche) · tostada a elegir o croissant</div>
         <span class="badge">el más pedido</span>
       </div>
       <div class="item-price">3.50€</div>
@@ -291,7 +323,6 @@
 
   <!-- ── TAPAS ── -->
   <div class="section" id="tapas">
-
     <div class="cat-label">De la Cocina</div>
     <div class="item"><div class="item-left"><div class="item-name">Croquetas de Jamón</div><div class="item-desc">6 unid. · crujientes y cremosas</div></div><div class="item-price">5.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Croquetas de Espinaca y Queso</div><div class="item-desc">6 unid. · queso fundido</div></div><div class="item-price">5.50€</div></div>
@@ -300,22 +331,11 @@
     <div class="item"><div class="item-left"><div class="item-name">Boquerones</div><div class="item-desc">En vinagre · aliño madrileño · salsa y limón</div></div><div class="item-price">6.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Alitas de Pollo</div><div class="item-desc">6 unid. · patatas rústicas</div></div><div class="item-price">7.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Patatas Bravas</div><div class="item-desc">Patatas rústicas caseras</div></div><div class="item-price">5.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Tequeños de Queso</div><div class="item-desc">5 unid. </div></div><div class="item-price">6.00€</div></div>
-    <!--
-    <div class="cat-label">Especial D'Escala</div>
-    <div class="item feat">
-      <div class="item-left">
-        <div class="item-name">Salchipapa</div>
-        <div class="item-desc">Patatas fritas con salchichas · salsas de la casa</div>
-        <span class="badge">toque peruano</span>
-      </div>
-      <div class="item-price">7.50€</div>
-    </div> -->
+    <div class="item"><div class="item-left"><div class="item-name">Tequeños de Queso</div><div class="item-desc">5 unid.</div></div><div class="item-price">6.00€</div></div>
   </div>
 
   <!-- ── BOCADILLOS ── -->
   <div class="section" id="bocadillos">
-
     <div class="cat-label">Sándwiches</div>
     <div class="item"><div class="item-left"><div class="item-name">Sándwich Mixto</div><div class="item-desc">Pan tostado · jamón york · queso fundido</div></div><div class="item-price">3.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Sándwich Mixto con Huevo</div><div class="item-desc">Pan tostado · jamón york · queso · huevo a la plancha</div></div><div class="item-price">4.50€</div></div>
@@ -330,12 +350,13 @@
       <div class="item-price">11.00€</div>
     </div>
     <div class="item">
-    <div class="item-left">
-    <div class="item-name">Adicionales:</div>
-    <div class="item-desc"> + Huevo</div></div><div class="item-price">1.00€</div></div>
+      <div class="item-left"><div class="item-name">Adicionales:</div><div class="item-desc">+ Huevo</div></div>
+      <div class="item-price">1.00€</div>
+    </div>
     <div class="item">
-      <div class="item-left">
-        <div class="item-desc"> + Cebolla caramelizada</div></div><div class="item-price">1.00€</div></div>
+      <div class="item-left"><div class="item-desc">+ Cebolla caramelizada</div></div>
+      <div class="item-price">1.00€</div>
+    </div>
   </div>
 
   <!-- ── PLATOS ── -->
@@ -369,14 +390,12 @@
 
   <!-- ── BEBIDAS ── -->
   <div class="section" id="bebidas">
-
     <div class="cat-label">Refrescos & Agua & Helados</div>
     <div class="item"><div class="item-left"><div class="item-name">Coca-Cola / Zero / Fanta</div></div><div class="item-price">2.20€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Nestea / Aquarius</div></div><div class="item-price">2.20€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Red Bull</div></div><div class="item-price">3.50€</div></div> -->
     <div class="item"><div class="item-left"><div class="item-name">Zumo Melocotón/Piña</div></div><div class="item-price">2.00€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Bitter Kas</div><div class="item-desc">20 cl</div></div><div class="item-price">2.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Swisppepers</div><div class="item-desc">tónica original, limón, naranja</div></div><div class="item-price">2.30€</div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Schweppes</div><div class="item-desc">Tónica original, limón, naranja</div></div><div class="item-price">2.30€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Agua Mineral</div><div class="item-desc">Con o sin gas · 50cl</div></div><div class="item-price">1.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Paleta de helado</div><div class="item-desc">Fresky Yogur</div></div><div class="item-price">1.50€</div></div>
 
@@ -387,13 +406,10 @@
     <div class="item"><div class="item-left"><div class="item-name">Mahou · Botellín</div><div class="item-desc">25cl · botella</div></div><div class="item-price">1.80€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Mahou · Tercio</div><div class="item-desc">33cl · botella</div></div><div class="item-price">2.80€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Mahou · Cubo Botellín</div><div class="item-desc">5 Unid. · 25cl botella</div></div><div class="item-price">10.00€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Cerveza Sin Alcohol</div></div><div class="item-price">2.00€</div></div> -->
 
     <div class="cat-label">Vinos</div>
     <div class="item"><div class="item-left"><div class="item-name">Vino Tinto · Copa</div></div><div class="item-price">2.50€</div></div>
     <div class="item"><div class="item-left"><div class="item-name">Vino Blanco · Copa</div></div><div class="item-price">2.50€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Vino Rosado · Copa</div></div><div class="item-price">2.50€</div></div> -->
-    <!--<div class="item"><div class="item-left"><div class="item-name">Cava · Copa</div></div><div class="item-price">3.50€</div></div> -->
 
     <div class="cat-label">Vermut & Aperitivos</div>
     <div class="item"><div class="item-left"><div class="item-name">Vermut Rojo</div><div class="item-desc">Con aceituna o naranja</div></div><div class="item-price">2.80€</div></div>
@@ -402,10 +418,9 @@
 
   <!-- ── COPAS ── -->
   <div class="section" id="copas">
-
-    <div class="cat-label">Ron · Copa </div>
+    <div class="cat-label">Ron · Copa</div>
     <div class="drinks-grid">
-      <div class="drink-card"><div class="item-name">Barceló</div><div class="item-desc"> Sólo · Ron dominicano</div><div class="item-price">4.50€</div></div>
+      <div class="drink-card"><div class="item-name">Barceló</div><div class="item-desc">Sólo · Ron dominicano</div><div class="item-price">4.50€</div></div>
       <div class="drink-card"><div class="item-name">Brugal</div><div class="item-desc">Sólo · Ron dominicano</div><div class="item-price">4.50€</div></div>
       <div class="drink-card"><div class="item-name">Bacardí Blanco</div><div class="item-desc">Sólo</div><div class="item-price">4.50€</div></div>
       <div class="drink-card"><div class="item-name">Bacardí Limón</div><div class="item-desc">Sólo</div><div class="item-price">4.50€</div></div>
@@ -413,7 +428,7 @@
 
     <div class="cat-label">Gin & Vodka</div>
     <div class="drinks-grid">
-      <div class="drink-card"><div class="item-name">Gin-Tonic</div><div class="item-desc">Ginebra (Beefeater / Seagram's) + tónica</div><div class="item-price">5.50€</div></div>
+      <div class="drink-card"><div class="item-name">Gin-Tonic</div><div class="item-desc">Beefeater / Seagram's + tónica</div><div class="item-price">5.50€</div></div>
       <div class="drink-card"><div class="item-name">Vodka</div><div class="item-desc">Absolut / Eristoff con refresco</div><div class="item-price">5.50€</div></div>
     </div>
 
@@ -426,15 +441,12 @@
     <div class="cat-label">Chupitos</div>
     <div class="drinks-grid">
       <div class="drink-card"><div class="item-name">Ron / Whisky / Coñac</div><div class="item-desc">Muy frío</div><div class="item-price">2.00€</div></div>
-      <div class="drink-card"><div class="item-name">Licor Macerado</div><div class="item-desc"> </div><div class="item-price">2.00€</div></div>
-      <div class="drink-card"><div class="item-name">Licor de hierbas o crema</div><div class="item-desc"> </div><div class="item-price">1.50€</div></div>
+      <div class="drink-card"><div class="item-name">Licor Macerado</div><div class="item-desc">&nbsp;</div><div class="item-price">2.00€</div></div>
+      <div class="drink-card"><div class="item-name">Licor de hierbas o crema</div><div class="item-desc">&nbsp;</div><div class="item-price">1.50€</div></div>
     </div>
 
     <div class="cat-label">Combinados Clásicos</div>
-    <div class="item"><div class="item-left"><div class="item-name">Combinados con Red Bull</div><div class="item-desc">Whisky/Vodka/Ron + Red Bull/Refresco</div></div><div class="item-price">6.50€</div></div>
-    <!--<div class="item"><div class="item-left"><div class="item-name">Mojito</div><div class="item-desc">Ron · menta · lima · azúcar · soda</div></div><div class="item-price">7.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Daiquiri</div><div class="item-desc">Ron · lima · azúcar</div></div><div class="item-price">7.00€</div></div>
-    <div class="item"><div class="item-left"><div class="item-name">Pisco Sour</div><div class="item-desc">Pisco · limón · clara · amargo · toque D'Escala</div><span class="badge">exclusivo</span></div><div class="item-price">7.50€</div></div> -->
+    <div class="item"><div class="item-left"><div class="item-name">Combinados con Red Bull</div><div class="item-desc">Whisky / Vodka / Ron + Red Bull / Refresco</div></div><div class="item-price">6.50€</div></div>
   </div>
 
   <!-- FOOTER -->
