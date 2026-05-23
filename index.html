@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D'Escala · Café Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #0D0B08;
+    color: #F2EAD8;
+    font-family: 'Cormorant Garamond', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fondo ambiental */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 100%, rgba(140,42,42,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 480px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0;
+  }
+
+  /* ── LÁMPARA ── */
+  .lamp-wrap {
+    margin-bottom: 28px;
+    animation: glow 4s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%,100% { filter: drop-shadow(0 0 10px rgba(201,168,76,0.3)); }
+    50%      { filter: drop-shadow(0 0 24px rgba(201,168,76,0.6)); }
+  }
+
+  /* ── LOGO ── */
+  .brand {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 10vw, 52px);
+    font-weight: 900;
+    color: #E8C97A;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-align: center;
+    text-shadow: 0 0 60px rgba(201,168,76,0.25);
+  }
+  .brand-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(12px, 3vw, 15px);
+    font-style: italic;
+    color: rgba(201,168,76,0.6);
+    letter-spacing: 0.35em;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; margin: 28px 0;
+  }
+  .divider-line { flex:1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent); }
+  .divider-dot { color: rgba(201,168,76,0.5); font-size: 8px; }
+
+  /* ── BOTONES PRINCIPALES ── */
+  .nav-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .nav-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 26px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: #C9A84C;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+  }
+  .nav-card:hover {
+    background: rgba(201,168,76,0.07);
+    border-color: rgba(201,168,76,0.5);
+    transform: translateX(4px);
+  }
+  .nav-card:hover::before { transform: scaleY(1); }
+
+  .nav-card-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .nav-card-text { flex: 1; }
+  .nav-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #E8C97A;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .nav-card-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(242,234,216,0.5);
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+  .nav-card-arrow {
+    color: rgba(201,168,76,0.4);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s, color 0.3s;
+  }
+  .nav-card:hover .nav-card-arrow {
+    transform: translateX(4px);
+    color: #C9A84C;
+  }
+
+  /* ── TAGLINE ── */
+  .tagline {
+    margin-top: 36px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(201,168,76,0.35);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+  .addr {
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    color: rgba(242,234,216,0.2);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- LÁMPARA SVG -->
+  <div class="lamp-wrap">
+    <svg width="54" height="48" viewBox="0 0 54 48" xmlns="http://www.w3.org/2000/svg">
+      <line x1="27" y1="0" x2="27" y2="12" stroke="#C9A84C" stroke-width="2"/>
+      <ellipse cx="27" cy="18" rx="16" ry="7" fill="#1a1a1a" stroke="#C9A84C" stroke-width="1"/>
+      <path d="M11 18 Q27 42 43 18 Z" fill="#C9A84C" opacity="0.85"/>
+      <line x1="44" y1="12" x2="50" y2="7" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+      <line x1="10" y1="12" x2="4"  y2="7" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+      <line x1="46" y1="18" x2="53" y2="18" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+      <line x1="8"  y1="18" x2="1"  y2="18" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- BRAND -->
+  <div class="brand">D'ESCALA</div>
+  <div class="brand-sub">Café · Bar</div>
+
+  <!-- DIVIDER -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot">✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- NAVEGACIÓN -->
+  <div class="nav-cards">
+
+    <a href="carta.html" class="nav-card">
+      <div class="nav-card-icon">🍽</div>
+      <div class="nav-card-text">
+        <div class="nav-card-title">Nuestra Carta</div>
+        <div class="nav-card-desc">Desayunos · Tapas · Bocadillos · Platos · Bebidas · Copas</div>
+      </div>
+      <div class="nav-card-arrow">›</div>
+    </a>
+
+    <a href="alergenos.html" class="nav-card">
+      <div class="nav-card-icon">⚠️</div>
+      <div class="nav-card-text">
+        <div class="nav-card-title">Tabla de Alérgenos</div>
+        <div class="nav-card-desc">Información sobre los 14 alérgenos · Reglamento UE 1169/2011</div>
+      </div>
+      <div class="nav-card-arrow">›</div>
+    </a>
+
+  </div>
+
+  <!-- PIE -->
+  <div class="tagline">
+    Buen ambiente, buena compañía,<br>buenos momentos.
+  </div>
+  <div class="addr">RONDA DEL SUR 18 · 28053 MADRID · EST. 2026</div>
+
+</div>
+</body>
+</html>
